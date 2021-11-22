@@ -6,6 +6,8 @@ import java.io.ObjectInputStream
 import java.io.Serializable
 
 class Ruta (var nom: String?, var desnivell: Int?, var desnivellAcumulat: Int?, var llistaDePunts: MutableList<PuntGeo> = mutableListOf<PuntGeo>()): Serializable {
+
+    constructor() : this(null, null, null, arrayListOf<PuntGeo>())
     companion object {
         private const val serialVersionUID: Long = 1
     }
@@ -35,22 +37,14 @@ class Ruta (var nom: String?, var desnivell: Int?, var desnivellAcumulat: Int?, 
     }
 
     fun mostrarRuta() {
-        val ficheroLecturaObjeto = ObjectInputStream(FileInputStream("Rutes.obj"))
-        try {
-            while (true){
-                val lectura = ficheroLecturaObjeto.readObject() as Ruta
-                println("Nombre: " + lectura.nom)
-                println("Desnivel: " + lectura.desnivell)
-                println("Desnivel Acumulado: " + lectura.desnivellAcumulat)
-                val puntos = lectura.llistaDePunts
-                for (i in 1..puntos.lastIndex){
-                    println("\tNombre Punto: " + lectura.getPuntNom(i) + " (" + lectura.getPuntLatitud(i) + ") "+ " (" + lectura.getPuntLongitud(i) + ")")
-                }
-                println("\n")
-            }
-        } catch (eof : EOFException){
-            ficheroLecturaObjeto.close()
+        println("Nombre: " + this.nom)
+        println("Desnivel: " + this.desnivell)
+        println("Desnivel Acumulado: " + this.desnivellAcumulat)
+        val puntos = this.llistaDePunts
+        for (i in 0..puntos.lastIndex){
+            println("" + (i+1) + "\tNombre Punto: " + this.getPuntNom(i) + " (" + this.getPuntLatitud(i) + ") "+ " (" + this.getPuntLongitud(i) + ")")
         }
+        println("\n")
         // Aquest és el mètode que heu d'implementar vosaltres
     }
 }
