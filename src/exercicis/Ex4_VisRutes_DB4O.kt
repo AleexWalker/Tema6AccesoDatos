@@ -1,7 +1,5 @@
 package exercicis
 
-
-
 import com.db4o.Db4oEmbedded
 import java.awt.EventQueue
 import java.awt.GridLayout
